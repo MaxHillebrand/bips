@@ -52,7 +52,7 @@ encodings and operations.
 # Signatures are ''(e, s)'' that satisfy ''e = hash(s⋅G - e⋅P || m)''. This supports more compact signatures, since [http://www.neven.org/papers/schnorr.pdf the hash ''e'' can be made as small as 16 bytes without sacrificing security], whereas an encoding of ''R'' inherently needs about 32 bytes. Moreover, this variant avoids minor complexity introduced by the encoding of the point ''R'' in the signature (see paragraphs "Encoding the sign of R" and "Implicit Y coordinate" further below in this subsection).
 # Signatures are ''(R, s)'' that satisfy ''s⋅G = R + hash(R || m)⋅P''. This supports batch verification, as there are no elliptic curve operations inside the hashes. Batch verification enables significant speedups.
 
-[[File:bip-schnorr/speedup-batch.png|center|frame|This graph shows the ratio between the time it takes to verify ''n'' signatures individually and to verify a batch of ''n'' signatures. This ratio goes up logarithmically with the number of signatures, or in other words: the total time to verify ''n'' signatures grows with ''O(n / log n)''.]]
+[[File:bip-schnorr/speedup-batch-comparison.png|center|frame|This graph shows the ratio between the time it takes to verify ''n'' signatures individually and to verify a batch of ''n'' signatures. There are different algorithms for this, Strauss' is more optimal for smaller ''n'', and Piggener's is more optimal for larger ''n''. lipsecp256k1 uses Piggener, since here the ratio goes up logarithmically with the number of signatures, or in other words: the total time to verify ''n'' signatures grows with ''O(n / log n)''.]]
 
 We choose the ''R''-option to support batch verification.
 
